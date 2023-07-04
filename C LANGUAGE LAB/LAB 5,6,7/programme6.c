@@ -1,24 +1,26 @@
 #include<stdio.h>
-#include<math.h>
-#define g 10
 
 int main()
 {
-	int t1,t2,t3,t4,t5;
-	t1=2*3.14*sqrt(10/g);
-	t2=2*3.14*sqrt(20/g);
-	t3=2*3.14*sqrt(30/g);
-	t4=2*3.14*sqrt(40/g);
-	t5=2*3.14*sqrt(50/g);
-	printf("  LENGTH\t\tTIME PERIOD\n");
-	printf("   10   \t\t    %d     \n",t1);
-    printf("   20   \t\t    %d     \n",t2);
-    printf("   30   \t\t    %d     \n",t3);
-    printf("   40   \t\t    %d     \n",t4);
-    printf("   50   \t\t    %d     \n",t5); 
+	int x1,y1,x2,y2,x3,y3;
+	float m1,m2,m3;
+	printf("ENTER the coordinates of first point (x1,y1)");
+	scanf("%d %d",&x1,&y1);
+	printf("ENTER the coordinates of second point (x2,y2)");
+	scanf("%d %d",&x2,&y2);
+	printf("ENTER the coordinates of third point (x3,y3)");
+	scanf("%d %d",&x3,&y3);
+	m1=(y2-y1)/(x2-x1);
+	m2=(y3-y2)/(x3-x2);
+	m3=(y1-y3)/(x1-x3);
+	if (m1!=m2 && m2!=m3 && m3!=m1)
+	printf("They form triangle");
+	else
+	printf("They do not form triangle");
 	
 	
     
     return 0;
 }
+
 
