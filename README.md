@@ -7,6 +7,19 @@ This repository is a cumulation of all my codes/subject work that has been taugh
 
 This folder contains all the codes from my C Programming Lab. It serves as a collection of the practical exercises and assignments completed during the lab sessions. The codes are organized according to the lab sessions covered in the curriculum.
 
+# 2. DBMS LAB
+
+This folder contains all the excercises from my DBMS Lab. It serves as a collection of the practical exercises and assignments completed during the lab sessions. The codes are organized according to the lab sessions covered in the curriculum.
+
+# 3. Design and Analysis of Algorithm
+
+This folder contains all the codes from my DAA (Design and Analysis of Algorithm) Lab. It serves as a collection of the practical exercises and assignments completed during the lab sessions. The codes are organized according to the lab sessions covered in the curriculum.
+
+# 4. Object Oriented Programming LAB (OOP LAB)
+
+This folder contains all the codes from my OOP Lab. It serves as a collection of the practical exercises and assignments completed during the lab sessions. The codes are organized according to the lab sessions covered in the curriculum.
+
+
 
 
 
