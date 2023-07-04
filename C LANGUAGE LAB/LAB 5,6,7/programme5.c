@@ -2,16 +2,14 @@
 
 int main()
 {
-	int a,b,c,t;
-	printf("Enter the value of a\n");
-	scanf("%d",&a);
-	printf("Enter the value of b\n");
-	scanf("%d",&b);
-	printf("Enter the value of c\n");
-	scanf("%d",&c);
-	t=((a*a)==(b*b)+(c*c))||((b*b)==(a*a)+(c*c))||((c*c)==(a*a)+(b*b));
-	printf("Display 1 if they are sides of right angled triangle else 0 = %d",t);
-    
+    float b_salary;
+    printf("Enter the basic salary of the person\n");
+    scanf("%f",&b_salary);
+    if(b_salary<1500)
+    printf("The gross salary of the person is\n %f",b_salary+b_salary*10/100+b_salary*40/100);
+    else
+    printf("The gross salary of the person is\n %f",b_salary+500+b_salary*50/100);
     return 0;
 }
+
 
