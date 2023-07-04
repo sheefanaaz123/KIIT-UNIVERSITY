@@ -2,24 +2,24 @@
 
 int main()
 {
-	float p,q,r,s;
-	printf("Enter the value of p\n");
-	scanf("%f",&p);
-	printf("Enter the value of q\n");
-	scanf("%f",&q);
-	printf("Enter the value of r\n");
-	scanf("%f",&r);
-	printf("Enter the value of s\n");
-	scanf("%f",&s);
-	
-	if(p*s==r*q)
-	printf("The wheatstone is balanced\n");
-		
-	printf("The wheatstone is not balanced\n");
-	s=r*q/p;
-	printf("Choose s=%.2f to balance the wheatstone\n",s);	
+    int r1,r2,r3,voltage,rs;
+    float is,t,rp,ip;
+    printf("Enter the value of r1,r2,r3\n");
+    scanf("%d %d %d",&r1,&r2,&r3);
+    rs=r1+r2+r3;
+    printf("The value of rs is %d\n",rs);
+    printf("Enter the value of voltage\n");
+    scanf("%d",&voltage);
+    is=(float)voltage/rs;
+    printf("The value of is is %f\n",is);
+    t=(float)1/r1+(float)1/r2+(float)1/r3;
+    rp=1/t;
+    printf("The value of rp is %f\n",rp);
+    ip=(float)voltage/rp;
+    printf("The value of ip is %f",ip);
     
-	return 0;
+    return 0;
 }
+
 
 

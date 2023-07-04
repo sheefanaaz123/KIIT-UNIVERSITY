@@ -2,21 +2,17 @@
 
 int main()
 {
-    int age,marks;
-    printf("Enter marks of the person\n");
-	scanf("%d",&marks);
-	printf("Enter the age of the person\n");
-	scanf("%d",&age);
-	marks=marks+40;
-	if(age<50)
-	marks=marks+20;
-	printf("The marks is %d\n",marks);
-	
-	
-	
-	  
+    float x1,y1,x2,y2,m;
+    printf("Enter the one point x1 and y1\n");
+    scanf("%f\n%f",&x1,&y1);
+    printf("Enter the one point x2 and y2\n");
+    scanf("%f\n%f",&x2,&y2);
+    m=(y2-y1)/(x2-x1);
+    printf("\nThe slope of the line is %.2f",m);
+    
     return 0;
 }
+
 
 
 

@@ -1,23 +1,37 @@
+
 #include<stdio.h>
+#define g 9.8
 
 int main()
 {
-	int a,b,c,max;
-	printf("Enter the value of a\n");
-	scanf("%d",&a);
-	printf("Enter the value of b\n");
-	scanf("%d",&b);
-	printf("Enter the value of c\n");
-	scanf("%d",&c);
-	max=a;
-	if(b>a)
-	max=b;
-	if(c>max)
-	max=c;
-	
-	printf("The maxiumum number is %d",max);
-	   
+    int u,t;
+	float v,s;
+	t=1;
+	printf("Enter the initial velocity u\n");
+	scanf("%d",&u);
+	t=t++;
+	v=u+g*t;
+	s=u*t+0.5*g*t*t;
+	printf("The value of v and s for time %d is %f and %f\n",t,v,s);
+	t=++t;
+	v=u+g*t;
+	s=u*t+0.5*g*t*t;
+	printf("The value of v and s for time %d is %f and %f\n",t,v,s);
+	t=++t;
+	v=u+g*t;
+	s=u*t+0.5*g*t*t;
+	printf("The value of v and s for time %d is %f and %f\n",t,v,s);
+	t=++t;
+	v=u+g*t;
+	s=u*t+0.5*g*t*t;
+	printf("The value of v and s for time %d is %f and %f\n",t,v,s);
+	t=++t;
+	 v=u+g*t;
+	s=u*t+0.5*g*t*t;
+	printf("The value of v and s for time %d is %f and %f\n",t,v,s);
+	  
     return 0;
 }
+
 
 
