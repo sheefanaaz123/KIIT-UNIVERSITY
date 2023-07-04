@@ -2,18 +2,17 @@
 
 int main()
 {
-    int V1,N2,N1;
-	float V2;
-	printf("Enter the value of V1\n");
-	scanf("%d",&V1);
-	printf("Enter the value of N2\n");
-    scanf("%d",&N2);
-	printf("Enter the value of N1\n");  
-	scanf("%d",&N1);
-	V2=(V1*N2)/N1;
-	printf("The value of V2(secondary voltage) is %f",V2);
-	
-    return 0;
+	int a,b,c,t,s;
+	printf("Enter the value of first side\n");
+	scanf("%d",&a);
+	printf("Enter the value of second side\n");
+	scanf("%d",&b);
+	printf("Enter the value of third side\n");
+	scanf("%d",&c);
+	t=((a+b>c)+(b+c>a)+(c+a>b))/3;
+	s=(a+b+c);
+	printf("Display sum of all sides if they are sides of the triangle else display 0  = %d",s);   
+	return 0;
 }
 
 
