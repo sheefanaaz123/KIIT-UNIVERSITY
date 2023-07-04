@@ -2,3 +2,31 @@
 
 I am currently pursuing B.Tech from Kalinga Institute of Industrial Technology Bhubaneswar, in computer science and systems engineering.
 This repository is a cumulation of all my codes/subject work that has been taught in my college. (2021-2025)
+
+
+
+
+
+
+# Getting Started
+To access the subject materials, navigate to the respective subject folder and explore the contents within each folder. The codes and subject work are organized in a logical manner to facilitate easy referencing and understanding.
+
+# Prerequisites
+To make the best use of the materials in this repository, it is recommended to have a basic understanding of the subjects and prerequisites specific to each course. Refer to the subject descriptions or consult your college curriculum for more details on the required background knowledge.
+
+# Contributions
+Contributions to this repository are currently not accepted as it primarily serves as a personal collection of my college codes and subject work. However, feel free to explore the materials and use them for your own learning purposes.
+
+If you find any errors or have suggestions for improvements, please create an issue in the respective subject folder, and I will do my best to address it.
+
+# License
+The content in this repository is for personal use only and may not be redistributed or used for any commercial purposes without permission.
+
+# Acknowledgments
+I would like to express my gratitude to the professors and educators who have taught the subjects included in this repository. Their knowledge and guidance have been invaluable in shaping my understanding of the subject matter.
+
+
+
+
+
+
