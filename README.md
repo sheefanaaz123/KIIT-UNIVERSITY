@@ -3,7 +3,9 @@
 I am currently pursuing B.Tech from Kalinga Institute of Industrial Technology Bhubaneswar, in computer science and systems engineering.
 This repository is a cumulation of all my codes/subject work that has been taught in my college. (2021-2025)
 
+# 1. C LANGUAGE LAB
 
+This folder contains all the codes from my C Programming Lab. It serves as a collection of the practical exercises and assignments completed during the lab sessions. The codes are organized according to the lab sessions covered in the curriculum.
 
 
 
