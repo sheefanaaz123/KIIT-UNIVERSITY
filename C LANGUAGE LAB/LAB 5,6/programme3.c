@@ -2,22 +2,29 @@
 
 int main()
 {
-    int r1,r2,r3,voltage,rs;
-    float is,t,rp,ip;
-    printf("Enter the value of r1,r2,r3\n");
-    scanf("%d %d %d",&r1,&r2,&r3);
-    rs=r1+r2+r3;
-    printf("The value of rs is %d\n",rs);
-    printf("Enter the value of voltage\n");
-    scanf("%d",&voltage);
-    is=(float)voltage/rs;
-    printf("The value of is is %f\n",is);
-    t=(float)1/r1+(float)1/r2+(float)1/r3;
-    rp=1/t;
-    printf("The value of rp is %f\n",rp);
-    ip=(float)voltage/rp;
-    printf("The value of ip is %f",ip);
-    
+	int x1,y1,x2,y2,x3,y3,x4,y4,m1,m2,value;
+	printf("Enter the value of x1\n");
+	scanf("%d",&x1);
+	printf("Enter the value of y1\n");
+	scanf("%d",&y1);
+	printf("Enter the value of x2\n");
+	scanf("%d",&x2);
+	printf("Enter the value of y2\n");
+	scanf("%d",&y2);
+	m1=(y2-y1)/(x2-x1);
+	printf("Enter the value of x3\n");
+	scanf("%d",&x3);
+	printf("Enter the value of y3\n");
+	scanf("%d",&y3);
+	printf("Enter the value of x4\n");
+	scanf("%d",&x4);
+	printf("Enter the value of y4\n");
+	scanf("%d",&y4);
+	m2=(y4-y3)/(x4-x3);
+	value=m1*m2*-1;
+	printf("Display 1 if they perpendicular else any other integer value =  %d",value);
+	
+	
     return 0;
 }
 

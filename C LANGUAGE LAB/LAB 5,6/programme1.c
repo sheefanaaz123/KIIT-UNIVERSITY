@@ -1,18 +1,16 @@
 #include<stdio.h>
-
 int main()
 {
-    float x1,y1,x2,y2,m;
-    printf("Enter the one point x1 and y1\n");
-    scanf("%f\n%f",&x1,&y1);
-    printf("Enter the one point x2 and y2\n");
-    scanf("%f\n%f",&x2,&y2);
-    m=(y2-y1)/(x2-x1);
-    printf("\nThe slope of the line is %.2f",m);
-    
+	int a,b,c,t;
+	printf("Enter the value of first side\n");
+	scanf("%d",&a);
+	printf("Enter the value of second side\n");
+	scanf("%d",&b);
+	printf("Enter the value of third side\n");
+	scanf("%d",&c);
+	t=((a+b>c)+(b+c>a)+(c+a>b))/3;
+	printf("Display the value 1 if those are side of the triangle else 0  =  %d",t);
+
     return 0;
 }
-
-
-
 

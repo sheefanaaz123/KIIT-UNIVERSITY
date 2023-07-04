@@ -1,37 +1,28 @@
-
 #include<stdio.h>
-#define g 9.8
 
 int main()
 {
-    int u,t;
-	float v,s;
-	t=1;
-	printf("Enter the initial velocity u\n");
-	scanf("%d",&u);
-	t=t++;
-	v=u+g*t;
-	s=u*t+0.5*g*t*t;
-	printf("The value of v and s for time %d is %f and %f\n",t,v,s);
-	t=++t;
-	v=u+g*t;
-	s=u*t+0.5*g*t*t;
-	printf("The value of v and s for time %d is %f and %f\n",t,v,s);
-	t=++t;
-	v=u+g*t;
-	s=u*t+0.5*g*t*t;
-	printf("The value of v and s for time %d is %f and %f\n",t,v,s);
-	t=++t;
-	v=u+g*t;
-	s=u*t+0.5*g*t*t;
-	printf("The value of v and s for time %d is %f and %f\n",t,v,s);
-	t=++t;
-	 v=u+g*t;
-	s=u*t+0.5*g*t*t;
-	printf("The value of v and s for time %d is %f and %f\n",t,v,s);
-	  
+    int x1,y1,x2,y2,x3,y3,x4,y4,m1,m2,t;
+	printf("Enter the value of x1\n");
+	scanf("%d",&x1);
+	printf("Enter the value of y1\n");
+	scanf("%d",&y1);
+	printf("Enter the value of x2\n");
+	scanf("%d",&x2);
+	printf("Enter the value of y2\n");
+	scanf("%d",&y2);
+	m1=(y2-y1)/(x2-x1);
+	printf("Enter the value of x3\n");
+	scanf("%d",&x3);
+	printf("Enter the value of y3\n");
+	scanf("%d",&y3);
+	printf("Enter the value of x4\n");
+	scanf("%d",&x4);
+	printf("Enter the value of y4\n");
+	scanf("%d",&y4);
+	m2=(y4-y3)/(x4-x3);
+	t=(m1==m2);
+	printf("Display the value 1 if they are parallel else 0 = %d",t);
     return 0;
 }
-
-
 
