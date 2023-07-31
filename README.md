@@ -19,7 +19,13 @@ This folder contains all the codes from my DAA (Design and Analysis of Algorithm
 
 This folder contains all the codes from my OOP Lab. It serves as a collection of the practical exercises and assignments completed during the lab sessions. The codes are organized according to the lab sessions covered in the curriculum.
 
+# 5. Computer Networks LAB (CN LAB)
 
+This folder contains all the codes from my Computer Networks LAB. It serves as a collection of the practical exercises and assignments completed during the lab sessions. The codes are organized according to the lab sessions covered in the curriculum.
+
+# 6. Advance Programming LAB (AP LAB)
+
+This folder contains all the codes in R from my AP Lab. It serves as a collection of the practical exercises and assignments completed during the lab sessions. The codes are organized according to the lab sessions covered in the curriculum.
 ***
 
 
