@@ -26,6 +26,10 @@ This folder contains all the codes from my Computer Networks LAB. It serves as a
 # 6. Advance Programming LAB (AP LAB)
 
 This folder contains all the codes in R from my AP Lab. It serves as a collection of the practical exercises and assignments completed during the lab sessions. The codes are organized according to the lab sessions covered in the curriculum.
+
+# 7. PYTHON LAB (TT LAB)
+
+This folder contains all the codes from my Python LAB. It serves as a collection of the practical exercises and assignments completed during the lab sessions. The codes are organized according to the lab sessions covered in the curriculum.
 ***
 
 
