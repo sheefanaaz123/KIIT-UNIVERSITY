@@ -30,6 +30,10 @@ This folder contains all the codes in R from my AP Lab. It serves as a collectio
 # 7. PYTHON LAB (TT LAB)
 
 This folder contains all the codes from my Python LAB. It serves as a collection of the practical exercises and assignments completed during the lab sessions. The codes are organized according to the lab sessions covered in the curriculum.
+
+# 8. Cloud Computing Lab (CC LAB)
+
+This folder contains all the codes from my Cloud Computing LAB. It serves as a collection of the practical exercises and assignments completed during the lab sessions. The codes are organized according to the lab sessions covered in the curriculum.
 ***
 
 
