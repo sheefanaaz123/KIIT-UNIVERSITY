@@ -1,10 +1,10 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 // Process structure to store process information
 struct Process {
+    int id; // Process ID
     int arrivalTime;
     int burstTime;
     int completionTime;
@@ -12,10 +12,14 @@ struct Process {
     int waitingTime;
 };
 
+bool compareArrivalTime(const Process& a, const Process& b) {
+    return a.arrivalTime < b.arrivalTime;
+}
+
 // Function to calculate FCFS scheduling for processes
 void calculateFCFS(vector<Process>& processes) {
     int n = processes.size();
-    
+
     // Calculate Completion Time (CT)
     int currentTime = 0;
     for (int i = 0; i < n; ++i) {
@@ -36,10 +40,10 @@ void calculateFCFS(vector<Process>& processes) {
 // Function to display the table
 void displayTable(const vector<Process>& processes) {
     cout << "Process\tAT\tBT\tCT\tTAT\tWT\n";
-    for (int i = 0; i < processes.size(); ++i) {
-        cout << "P" << i + 1 << "\t" << processes[i].arrivalTime << "\t"
-             << processes[i].burstTime << "\t" << processes[i].completionTime << "\t"
-             << processes[i].turnaroundTime << "\t" << processes[i].waitingTime << "\n";
+    for (const Process& p : processes) {
+        cout << "P" << p.id << "\t" << p.arrivalTime << "\t"
+             << p.burstTime << "\t" << p.completionTime << "\t"
+             << p.turnaroundTime << "\t" << p.waitingTime << "\n";
     }
 }
 
@@ -54,12 +58,15 @@ int main() {
     // Input arrival time and burst time for each process
     cout << "Enter arrival time and burst time for each process:\n";
     for (int i = 0; i < n; ++i) {
-        cout << "Process " << i + 1 << " Arrival Time: ";
+        processes[i].id = i + 1; // Assign process ID
+        cout << "Process " << processes[i].id << " Arrival Time: ";
         cin >> processes[i].arrivalTime;
 
-        cout << "Process " << i + 1 << " Burst Time: ";
+        cout << "Process " << processes[i].id << " Burst Time: ";
         cin >> processes[i].burstTime;
     }
+
+    sort(processes.begin(), processes.end(), compareArrivalTime);
 
     // Calculate FCFS scheduling
     calculateFCFS(processes);
