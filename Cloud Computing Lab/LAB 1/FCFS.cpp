@@ -19,7 +19,10 @@ void calculateFCFS(vector<Process>& processes) {
     // Calculate Completion Time (CT)
     int currentTime = 0;
     for (int i = 0; i < n; ++i) {
-        processes[i].completionTime = max(currentTime, processes[i].arrivalTime) + processes[i].burstTime;
+        if (currentTime < processes[i].arrivalTime) {
+            currentTime = processes[i].arrivalTime;
+        }
+        processes[i].completionTime = currentTime + processes[i].burstTime;
         currentTime = processes[i].completionTime;
     }
 
@@ -33,9 +36,10 @@ void calculateFCFS(vector<Process>& processes) {
 // Function to display the table
 void displayTable(const vector<Process>& processes) {
     cout << "Process\tAT\tBT\tCT\tTAT\tWT\n";
-    for (const Process& p : processes) {
-        cout << "P" << (&p - &processes[0]) + 1 << "\t" << p.arrivalTime << "\t"
-             << p.burstTime << "\t" << p.completionTime << "\t" << p.turnaroundTime << "\t" << p.waitingTime << "\n";
+    for (int i = 0; i < processes.size(); ++i) {
+        cout << "P" << i + 1 << "\t" << processes[i].arrivalTime << "\t"
+             << processes[i].burstTime << "\t" << processes[i].completionTime << "\t"
+             << processes[i].turnaroundTime << "\t" << processes[i].waitingTime << "\n";
     }
 }
 
