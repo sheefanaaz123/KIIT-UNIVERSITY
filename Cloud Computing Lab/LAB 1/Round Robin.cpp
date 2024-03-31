@@ -1,120 +1,164 @@
 #include <iostream>
-#include <vector>
-#include <queue>
-
+#include <algorithm> 
+#include <iomanip>
+#include <queue> 
+#include <string.h>
 using namespace std;
 
-// Process structure to store process information
-struct Process {
-    int arrivalTime;
-    int burstTime;
-    int remainingBurstTime;
-    int completionTime;
-    int turnaroundTime;
-    int waitingTime;
+struct process {
+    int pid;
+    int arrival_time;
+    int burst_time;
+    int start_time;
+    int completion_time;
+    int turnaround_time;
+    int waiting_time;
+    int response_time;
 };
 
-// Function to calculate Round Robin scheduling for processes
-void calculateRoundRobin(vector<Process>& processes, int timeQuantum) {
-    int n = processes.size();
-    
-    queue<int> processQueue;
-    int currentTime = 0;
-    int remainingProcesses = n;
+bool compare1(process p1, process p2) 
+{ 
+    return p1.arrival_time < p2.arrival_time;
+}
 
-    // Initialize the remaining burst time for each process
-    for (int i = 0; i < n; ++i) {
-        processes[i].remainingBurstTime = processes[i].burstTime;
+bool compare2(process p1, process p2) 
+{  
+    return p1.pid < p2.pid;
+}
+
+int main() {
+
+    int n;
+    int tq;
+    struct process p[100];
+    float avg_turnaround_time;
+    float avg_waiting_time;
+    float avg_response_time;
+    float cpu_utilisation;
+    int total_turnaround_time = 0;
+    int total_waiting_time = 0;
+    int total_response_time = 0;
+    int total_idle_time = 0;
+    float throughput;
+    int burst_remaining[100];
+    int idx;
+
+    cout << setprecision(2) << fixed;
+
+    cout<<"Enter the number of processes: ";
+    cin>>n;
+    cout<<"Enter time quantum: ";
+    cin>>tq;
+
+    for(int i = 0; i < n; i++) {
+        cout<<"Enter arrival time of process "<<i+1<<": ";
+        cin>>p[i].arrival_time;
+        cout<<"Enter burst time of process "<<i+1<<": ";
+        cin>>p[i].burst_time;
+        burst_remaining[i] = p[i].burst_time;
+        p[i].pid = i+1;
+        cout<<endl;
     }
 
-    // Process until all processes are completed
-    while (remainingProcesses > 0) {
-        for (int i = 0; i < n; ++i) {
-            if (processes[i].arrivalTime <= currentTime && processes[i].remainingBurstTime > 0) {
-                // Process the current process for the time quantum or remaining burst time, whichever is smaller
-                int executionTime = min(timeQuantum, processes[i].remainingBurstTime);
-                processes[i].remainingBurstTime -= executionTime;
-                currentTime += executionTime;
+    sort(p,p+n,compare1);
 
-                // If the process is completed
-                if (processes[i].remainingBurstTime == 0) {
-                    processes[i].completionTime = currentTime;
-                    processes[i].turnaroundTime = processes[i].completionTime - processes[i].arrivalTime;
-                    processes[i].waitingTime = processes[i].turnaroundTime - processes[i].burstTime;
-                    --remainingProcesses;
-                }
+    queue<int> q;
+    int current_time = 0;
+    q.push(0);
+    int completed = 0;
+    int mark[100];
+    memset(mark,0,sizeof(mark));
+    mark[0] = 1;
 
-                // Add the process back to the queue if it still has remaining burst time
-                if (processes[i].remainingBurstTime > 0) {
-                    processQueue.push(i);
-                }
-            }
+    while(completed != n) {
+        idx = q.front();
+        q.pop();
+
+        if(burst_remaining[idx] == p[idx].burst_time) {
+            p[idx].start_time = max(current_time,p[idx].arrival_time);
+            total_idle_time += p[idx].start_time - current_time;
+            current_time = p[idx].start_time;
         }
 
-        // Move to the next process in the queue
-        if (!processQueue.empty()) {
-            int frontProcess = processQueue.front();
-            processQueue.pop();
-            processQueue.push(frontProcess);
+        if(burst_remaining[idx]-tq > 0) {
+            burst_remaining[idx] -= tq;
+            current_time += tq;
         }
         else {
-            // If the queue is empty, find the next process that arrives
-            for (int i = 0; i < n; ++i) {
-                if (processes[i].arrivalTime > currentTime) {
-                    currentTime = processes[i].arrivalTime;
+            current_time += burst_remaining[idx];
+            burst_remaining[idx] = 0;
+            completed++;
+
+            p[idx].completion_time = current_time;
+            p[idx].turnaround_time = p[idx].completion_time - p[idx].arrival_time;
+            p[idx].waiting_time = p[idx].turnaround_time - p[idx].burst_time;
+            p[idx].response_time = p[idx].start_time - p[idx].arrival_time;
+
+            total_turnaround_time += p[idx].turnaround_time;
+            total_waiting_time += p[idx].waiting_time;
+            total_response_time += p[idx].response_time;
+        }
+
+        for(int i = 1; i < n; i++) {
+            if(burst_remaining[i] > 0 && p[i].arrival_time <= current_time && mark[i] == 0) {
+                q.push(i);
+                mark[i] = 1;
+            }
+        }
+        if(burst_remaining[idx] > 0) {
+            q.push(idx);
+        }
+
+        if(q.empty()) {
+            for(int i = 1; i < n; i++) {
+                if(burst_remaining[i] > 0) {
+                    q.push(i);
+                    mark[i] = 1;
                     break;
                 }
             }
         }
+
+
     }
+
+    avg_turnaround_time = (float) total_turnaround_time / n;
+    avg_waiting_time = (float) total_waiting_time / n;
+    avg_response_time = (float) total_response_time / n;
+    cpu_utilisation = ((p[n-1].completion_time - total_idle_time) / (float) p[n-1].completion_time)*100;
+    throughput = float(n) / (p[n-1].completion_time - p[0].arrival_time);
+
+    sort(p,p+n,compare2);
+
+    cout<<endl;
+    cout<<"#P\t"<<"AT\t"<<"BT\t"<<"ST\t"<<"CT\t"<<"TAT\t"<<"WT\t"<<"RT\t"<<"\n"<<endl;
+
+    for(int i = 0; i < n; i++) {
+        cout<<p[i].pid<<"\t"<<p[i].arrival_time<<"\t"<<p[i].burst_time<<"\t"<<p[i].start_time<<"\t"<<p[i].completion_time<<"\t"<<p[i].turnaround_time<<"\t"<<p[i].waiting_time<<"\t"<<p[i].response_time<<"\t"<<"\n"<<endl;
+    }
+    cout<<"Average Turnaround Time = "<<avg_turnaround_time<<endl;
+    cout<<"Average Waiting Time = "<<avg_waiting_time<<endl;
+    cout<<"Average Response Time = "<<avg_response_time<<endl;
+    cout<<"CPU Utilization = "<<cpu_utilisation<<"%"<<endl;
+    cout<<"Throughput = "<<throughput<<" process/unit time"<<endl;
+
+
 }
 
-// Function to display the table
-void displayTable(const vector<Process>& processes) {
-    cout << "Process\tAT\tBT\tCT\tTAT\tWT\n";
-    for (const Process& p : processes) {
-        cout << "P" << (&p - &processes[0]) + 1 << "\t" << p.arrivalTime << "\t"
-             << p.burstTime << "\t" << p.completionTime << "\t" << p.turnaroundTime << "\t" << p.waitingTime << "\n";
-    }
-}
+/*
 
-int main() {
-    int n, timeQuantum;
+AT - Arrival Time of the process
+BT - Burst time of the process
+ST - Start time of the process
+CT - Completion time of the process
+TAT - Turnaround time of the process
+WT - Waiting time of the process
+RT - Response time of the process
 
-    cout << "Enter the number of processes: ";
-    cin >> n;
+Formulas used:
 
-    cout << "Enter time quantum for Round Robin: ";
-    cin >> timeQuantum;
+TAT = CT - AT
+WT = TAT - BT
+RT = ST - AT
 
-    vector<Process> processes(n);
-
-    // Input arrival time and burst time for each process
-    cout << "Enter arrival time and burst time for each process:\n";
-    for (int i = 0; i < n; ++i) {
-        cout << "Process " << i + 1 << " Arrival Time: ";
-        cin >> processes[i].arrivalTime;
-
-        cout << "Process " << i + 1 << " Burst Time: ";
-        cin >> processes[i].burstTime;
-    }
-
-    // Calculate Round Robin scheduling
-    calculateRoundRobin(processes, timeQuantum);
-
-    // Display the table
-    displayTable(processes);
-    
-     double avgTurnaroundTime = 0, avgWaitingTime = 0;
-    for (const Process& p : processes) {
-        avgTurnaroundTime += p.turnaroundTime;
-        avgWaitingTime += p.waitingTime;
-    }
-    avgTurnaroundTime /= n;
-    avgWaitingTime /= n;
-
-    cout << "\nAverage Turnaround Time: " << avgTurnaroundTime << endl;
-    cout << "Average Waiting Time: " << avgWaitingTime << endl;
-
-    return 0;
-}
+*/
