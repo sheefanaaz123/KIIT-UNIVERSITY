@@ -1,64 +1,95 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
 
+// Process structure to store process information
+struct Process {
+    int id; // Process ID
+    int arrivalTime;
+    int burstTime;
+    int completionTime;
+    int turnaroundTime;
+    int waitingTime;
+};
+
+bool compareArrivalTime(const Process& a, const Process& b) {
+    if (a.arrivalTime == b.arrivalTime)
+        return a.burstTime < b.burstTime;
+    return a.arrivalTime < b.arrivalTime;
+}
+
+// Function to calculate SJF scheduling for processes
+void calculateSJF(vector<Process>& processes) {
+    int n = processes.size();
+
+    // Sort processes based on arrival time and burst time
+    sort(processes.begin(), processes.end(), compareArrivalTime);
+
+    // Calculate Completion Time (CT)
+    int currentTime = 0;
+    for (int i = 0; i < n; ++i) {
+        if (currentTime < processes[i].arrivalTime) {
+            currentTime = processes[i].arrivalTime;
+        }
+        processes[i].completionTime = currentTime + processes[i].burstTime;
+        currentTime = processes[i].completionTime;
+    }
+
+    // Calculate Turnaround Time (TAT) and Waiting Time (WT)
+    for (int i = 0; i < n; ++i) {
+        processes[i].turnaroundTime = processes[i].completionTime - processes[i].arrivalTime;
+        processes[i].waitingTime = processes[i].turnaroundTime - processes[i].burstTime;
+    }
+}
+
+// Function to display the table
+void displayTable(const vector<Process>& processes) {
+    cout << "Process\tAT\tBT\tCT\tTAT\tWT\n";
+    for (const Process& p : processes) {
+        cout << "P" << p.id << "\t" << p.arrivalTime << "\t"
+             << p.burstTime << "\t" << p.completionTime << "\t"
+             << p.turnaroundTime << "\t" << p.waitingTime << "\n";
+    }
+}
+
 int main() {
+    int n;
 
-	// Matrix for storing Process Id, Burst
-	// Time, Average Waiting Time & Average
-	// Turn Around Time.
-	int A[100][4];
-	int i, j, n, total = 0, index, temp;
-	float avg_wt, avg_tat;
+    cout << "Enter the number of processes: ";
+    cin >> n;
 
-	cout << "Enter number of process: ";
-	cin >> n;
+    vector<Process> processes(n);
 
-	cout << "Enter Burst Time:" << endl;
+    // Input arrival time and burst time for each process
+    cout << "Enter arrival time and burst time for each process:\n";
+    for (int i = 0; i < n; ++i) {
+        processes[i].id = i + 1; // Assign process ID
+        cout << "Process " << processes[i].id << " Arrival Time: ";
+        cin >> processes[i].arrivalTime;
 
-	// User Input Burst Time and alloting Process Id.
-	for (i = 0; i < n; i++) {
-		cout << "P" << i + 1 << ": ";
-		cin >> A[i][1];
-		A[i][0] = i + 1;
-	}
+        cout << "Process " << processes[i].id << " Burst Time: ";
+        cin >> processes[i].burstTime;
+    }
 
-	// Sorting process according to their Burst Time.
-	for (i = 0; i < n; i++) {
-		index = i;
-		for (j = i + 1; j < n; j++)
-			if (A[j][1] < A[index][1])
-				index = j;
-		temp = A[i][1];
-		A[i][1] = A[index][1];
-		A[index][1] = temp;
+    // Calculate SJF scheduling
+    calculateSJF(processes);
 
-		temp = A[i][0];
-		A[i][0] = A[index][0];
-		A[index][0] = temp;
-	}
+    // Display the table
+    displayTable(processes);
 
-	A[0][2] = 0;
-	// Calculation of Waiting Times
-	for (i = 1; i < n; i++) {
-		A[i][2] = 0;
-		for (j = 0; j < i; j++)
-			A[i][2] += A[j][1];
-		total += A[i][2];
-	}
+    // Calculate average turnaround time and average waiting time
+    double avgTurnaroundTime = 0, avgWaitingTime = 0;
+    for (const Process& p : processes) {
+        avgTurnaroundTime += p.turnaroundTime;
+        avgWaitingTime += p.waitingTime;
+    }
+    avgTurnaroundTime /= n;
+    avgWaitingTime /= n;
 
-	avg_wt = (float)total / n;
-	total = 0;
-	cout << "P	 BT	 WT	 TAT" << endl;
+    cout << "\nAverage Turnaround Time: " << avgTurnaroundTime << endl;
+    cout << "Average Waiting Time: " << avgWaitingTime << endl;
 
-	// Calculation of Turn Around Time and printing the
-	// data.
-	for (i = 0; i < n; i++) {
-		A[i][3] = A[i][1] + A[i][2];
-		total += A[i][3];
-		cout << "P" << A[i][0] << "	 " << A[i][1] << "	 " << A[i][2] << "	 " << A[i][3] << endl;
-	}
-
-	avg_tat = (float)total / n;
-	cout << "Average Waiting Time= " << avg_wt << endl;
-	cout << "Average Turnaround Time= " << avg_tat << endl;
+    return 0;
 }
